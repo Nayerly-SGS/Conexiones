@@ -4,23 +4,12 @@ Esta guía paso a paso te enseñará a configurar tu entorno local en **Visual S
 
 ---
 
-## 📋 1. Requisitos Previos
-
-Antes de comenzar, asegúrate de tener listo lo siguiente:
-
-1. **Visual Studio Code** instalado en tu computadora.
-2. **Python 3.9 o superior** instalado.
-3. Acceso a tu cuenta y Workspace de **Databricks**.
-4. **Cluster encendido:** El cluster de Databricks debe estar en estado **Running (círculo verde)** al momento de ejecutar consultas.
-
----
-
-## 🔑 2. ¿Dónde conseguir tus credenciales de Databricks?
+##  1. ¿Dónde conseguir tus credenciales de Databricks?
 
 Para conectarte necesitarás 3 datos clave:
 
 1. **Server Hostname (`HOST`):**
-   - Es la URL base de tu workspace de Databricks (por ejemplo: `2443867715697868.8.gcp.databricks.com` — *sin `https://`*).
+   - Es la URL base de tu workspace de Databricks (por ejemplo: `http://2443867715697868.8.gcp.databricks.com` o *sin `https://`*).
 2. **HTTP Path (`HTTP_PATH`):**
    - Ve a **Compute** > Selecciona tu **Cluster** > Despliega **Advanced Options** > Pestaña **JDBC/ODBC** > Copia el valor de **HTTP Path**.
 3. **Personal Access Token (`TOKEN`):**
@@ -28,7 +17,7 @@ Para conectarte necesitarás 3 datos clave:
 
 ---
 
-## 💻 3. Paso 1: Instalar Librerías en la Terminal
+##  2. Paso 1: Instalar Librerías en la Terminal
 
 Abre la terminal integrada en VS Code con el atajo `Ctrl + ñ` (o en el menú superior: `Terminal > New Terminal`) y ejecuta el siguiente comando:
 
@@ -38,9 +27,11 @@ pip install databricks-sql-connector pandas pyarrow
 
 ---
 
-## 🐍 4. Paso 2: Crear y Ejecutar el Script (`main.py` o en un Notebook `.ipynb`)
+##  3. Paso 2: Crear y Ejecutar el Script (`main.py` o en un Notebook `.ipynb`)
 
 Crea un archivo nuevo llamado `conexion_databricks.py` (o en un Jupyter Notebook `.ipynb`), copia el siguiente bloque de código completo, reemplaza tus credenciales y ejecútalo:
+
+`ASI ME CONECTE YO, SI NECESITAS OTRA LIBRERIA O HACER UN ANÁLISIS DIFERENTE, LA CONFIGURACIÓN ES IGUAL LO QUE CAMBIA ES EL RESTO`
 
 ```python
 import pandas as pd
@@ -49,8 +40,8 @@ from databricks import sql
 # ==========================================
 # 1. PARÁMETROS DE CONEXIÓN
 # ==========================================
-# NOTA: En HOST coloca solo el dominio (sin 'https://' ni barras al final)
-HOST = "2443867715697868.8.gcp.databricks.com"
+# NOTA: En HOST coloca solo el dominio (con o sin 'https://' Queda a libre albedrío)
+HOST = "http://2443867715697868.8.gcp.databricks.com"
 HTTP_PATH = "/sql/protocolv1/o/2443867715697868/xxxx-xxxxxx-xxxxxx"  # Reemplaza con tu HTTP Path
 TOKEN = "dapixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"                     # Reemplaza con tu Personal Access Token
 
@@ -99,6 +90,6 @@ print(df.head())
 
 ## ⚠️ 5. Solución de Problemas Frecuentes
 
-* **Error `Invalid URL / Hostname`:** Asegúrate de que `HOST` no tenga `http://` ni `https://`, solo el nombre de dominio (ej. `2443867715697868.8.gcp.databricks.com`).
+* **Error `Invalid URL / Hostname`:** Asegúrate de que `HOST` no tenga `http://` ni `https://`, solo el nombre de dominio (ej. `2443867715697868.8.gcp.databricks.com`). (`NO ME PASO, PERO PODRIA PASAR`)
 * **Error `Connection Timeout / Cluster Not Found`:** Revisa en Databricks que tu cluster no esté apagado o en reposo (debe estar en verde).
 * **Error `Permission Denied`:** Verifica que tu usuario o el token tengan permisos de lectura sobre el catálogo y tabla (`as_ds_v2.marcobre.mpc_1`).
