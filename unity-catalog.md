@@ -4,16 +4,6 @@ Guía paso a paso para configurar **Visual Studio Code**, conectarse al cluster 
 
 ---
 
-## 📋 Índice
-1. [Requisitos Previos](#1-requisitos-previos)
-2. [Obtención de Credenciales en Databricks](#2-obtención-de-credenciales-en-databricks)
-3. [Parte 1: Exploración Visual con SQLTools en VS Code](#3-parte-1-exploración-visual-con-sqltools-en-vs-code)
-4. [Parte 2: Conexión mediante Python y Jupyter Notebooks](#4-parte-2-conexión-mediante-python-y-jupyter-notebooks)
-5. [Estructura de Consultas en Unity Catalog (3 Niveles)](#5-estructura-de-consultas-en-unity-catalog-3-niveles)
-6. [Troubleshooting y Buenas Prácticas](#6-troubleshooting-y-buenas-prácticas)
-
----
-
 ## 1. Requisitos Previos
 
 - **Visual Studio Code** instalado.
@@ -29,8 +19,8 @@ Antes de configurar VS Code, obtén estos 3 parámetros desde la plataforma web:
 
 ### A. Hostname del Workspace
 - Es la URL de tu Databricks.
-- **Formato requerido:** Copia únicamente el dominio, **sin** `https://` y **sin** la barra `/` final.
-  - *Ejemplo:* `2443867715697868.8.gcp.databricks.com`
+- **Formato requerido:** Copia únicamente el dominio.
+  - *Ejemplo:* `https://2443867715697868.8.gcp.databricks.com`
 
 ### B. Personal Access Token (PAT)
 1. En Databricks, haz clic en tu perfil (esquina superior derecha) > **Settings**.
@@ -38,7 +28,7 @@ Antes de configurar VS Code, obtén estos 3 parámetros desde la plataforma web:
 3. Asigna un nombre descriptivo (ej. `vscode-token`).
 4. Define el tiempo de expiración (Lifetime).
 5. Selecciona los permisos necesarios: `sql`, `unity catalog`, `cluster`, `workspace` y `command-execution` (o el perfil **BI Tools**).
-6. Haz clic en **Generate** y **copia el token inmediatamente (`dapi...`)**. *(No se volverá a mostrar)*.
+6. Haz clic en **Generate** y **copia el token inmediatamente y guardalo (`dapi...`)**. *(No se volverá a mostrar)*.
 
 ### C. HTTP Path del Cluster
 1. En el menú lateral izquierdo, ve a **Compute**.
@@ -53,8 +43,9 @@ Antes de configurar VS Code, obtén estos 3 parámetros desde la plataforma web:
 
 ### Paso 1: Instalar Extensiones
 Desde la pestaña de Extensiones de VS Code (`Ctrl + Shift + X`), busca e instala:
-- **SQLTools**
-- **SQLTools Databricks Driver**
+
+<img width="1502" height="896" alt="sql" src="https://github.com/user-attachments/assets/9a711f7c-7af2-4b3c-b0ac-d56d6c35ea93" />
+
 
 ### Paso 2: Crear y Configurar la Conexión
 1. En la barra lateral izquierda, haz clic en el ícono de base de datos (**SQLTools**).
@@ -65,11 +56,11 @@ Desde la pestaña de Extensiones de VS Code (`Ctrl + Shift + X`), busca e instal
 | :--- | :--- |
 | **Connection name** | Nombre de tu preferencia (ej. `Databricks Unity Catalog` o `as_ds_v2`) |
 | **Connect using** | `Hostname and Token` |
-| **Host** | Tu URL limpia (ej. `2443867715697868.8.gcp.databricks.com`) |
+| **Host** | Tu URL limpia (ej. `https://2443867715697868.8.gcp.databricks.com`) |
 | **Path** | Tu `HTTP Path` obtenido del cluster |
 | **Token** | Tu `Personal Access Token` (`dapi...`) |
 | **Catalog** | `as_ds_v2` |
-| **Schema** | *(Opcional: déjalo vacío para listar todos los esquemas)* |
+| **Schema** | *(déjalo vacío para listar todos los esquemas)* |
 
 4. Haz clic en **Test Connection**. Al ver el mensaje de éxito, haz clic en **Save Connection**.
 5. Presiona **Connect Now** (ícono de enchufe).
