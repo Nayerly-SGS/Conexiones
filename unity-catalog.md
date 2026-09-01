@@ -66,6 +66,7 @@ Desde la pestaña de Extensiones de VS Code (`Ctrl + Shift + X`), busca e instal
 5. Presiona **Connect Now** (ícono de enchufe).
 
 ### Paso 3: Probar una Consulta SQL
+*(se abre solo un archivo .sql, pero si no genera nada haz lo siguiente)*
 Abre un archivo de consulta (`Ctrl + Shift + E`) y ejecuta:
 ```sql
 SELECT * FROM as_ds_v2.marcobre.mpc_1 LIMIT 10;
