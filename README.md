@@ -27,15 +27,18 @@ with sql.connect(
     http_path=HTTP_PATH,
     access_token=TOKEN
 ) as connection:
-    query = """
-        SELECT * 
-        FROM as_ds_v2.marcobre.mpc_1 
-        -- WHERE fecha >= '2026-01-01'  -- (Opcional: filtrar para traer solo lo necesario)
-    """
-    df = pd.read_sql(query, connection)
+    with connection.cursor() as cursor:
+        query = """
+            SELECT * 
+            FROM as_ds_v2.marcobre.mpc_1
+            LIMIT 1000
+        """
+        cursor.execute(query)
+        # Construcción directa del DataFrame sin advertencias
+        df = pd.DataFrame(cursor.fetchall(), columns=[col[0] for col in cursor.description])
 
 print("Forma del dataset:", df.shape)
-df.head()
+display(df.head())
 
 
 
