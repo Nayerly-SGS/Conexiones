@@ -25,5 +25,5 @@ Necesitamos pasar esos 5,800 archivos sueltos a algo ordenado, limpio, y fácil 
 Para resolver la dispersión de los 5,800 archivos sin sobrecomplicar el sistema, avanzaremos en tres capas:
 
 1. **Bronze (Dato Crudo):** Se ingesta cada archivo tal como llega de planta, sin alterar columnas ni formatos, garantizando que el dato original nunca se pierda.
-2. **Silver (Limpio y Homogeneizado):** Se corrigen tipos de datos, se manejan nulos, se ordenan las marcas de tiempo (frecuencias de 10s y 60s) y se separan por familias reales de sensores.
+2. **Silver (Limpio):** Se corrigen tipos de datos, se manejan nulos, se ordenan las marcas de tiempo y se separan por familias reales de sensores.
 3. **Gold (Consultas y Reportabilidad):** Tablas listas, optimizadas y modeladas en Unity Catalog para que cualquier usuario del equipo pueda consultar y crear dashboards sin lidiar con el desorden de origen.
