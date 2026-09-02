@@ -16,3 +16,14 @@ Necesitamos pasar esos 5,800 archivos sueltos a algo ordenado, limpio, y fácil 
 | **Data Vault** | Un modelo pensado para cuando varias fuentes distintas describen lo mismo de formas distintas (ej. 3 sistemas que hablan del mismo cliente) | Nosotros tenemos una sola fuente (el sistema de la planta) — este modelo resuelve un problema que no tenemos, y solo agregaría más tablas y más complicación sin necesidad. |
 | **Arquitectura Lambda (tiempo real + histórico en paralelo)** | Tener un sistema para datos históricos y OTRO sistema aparte corriendo en paralelo para ver todo "en vivo" | Cuesta el doble (hay que mantener dos sistemas), y no tenemos confirmado que se necesite ver todo en tiempo real — los archivos llegan por día, no en vivo. |
 | **Medallion (la que elegimos)** | Tres pasos claros: 1) guardar el dato crudo tal cual llega, 2) limpiarlo, 3) juntarlo en tablas finales fáciles de usar | — |
+
+
+---
+
+### 🏆 Nuestra Propuesta: Arquitectura Medallion
+
+Para resolver la dispersión de los 5,800 archivos sin sobrecomplicar el sistema, avanzaremos en tres capas:
+
+1. **Bronze (Dato Crudo):** Se ingesta cada archivo tal como llega de planta, sin alterar columnas ni formatos, garantizando que el dato original nunca se pierda.
+2. **Silver (Limpio y Homogeneizado):** Se corrigen tipos de datos, se manejan nulos, se ordenan las marcas de tiempo (frecuencias de 10s y 60s) y se separan por familias reales de sensores.
+3. **Gold (Consultas y Reportabilidad):** Tablas listas, optimizadas y modeladas en Unity Catalog para que cualquier usuario del equipo pueda consultar y crear dashboards sin lidiar con el desorden de origen.
